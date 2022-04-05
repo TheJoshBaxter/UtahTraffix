@@ -5,7 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PagedList;
 using UtahTraffix.Models;
+
+
 
 namespace UtahTraffix.Controllers
 {
@@ -20,27 +23,26 @@ namespace UtahTraffix.Controllers
 
         public IActionResult Index()
         {
-            //var crashes = _repo.GetCrashesFiltered();
-            //crashes
-
-
 
             return View();
         }
-
-        public IActionResult CrashList()//int pageNum = 1
-
+             
+        //CRASH LIST
+        public IActionResult CrashList( int? page)//int pageNum = 1
         {
-            //int pageNum = 1;
-            //int pageSize = 20;
-
+         
 
             var crashes = _repo.GetCrashesFiltered();
-           // .Take(pageSize);
 
-            return View(crashes);
+
+            int pageSize = 20;
+            int pageNum = (page ?? 1);
+            return View(crashes.ToPagedList(pageNum, pageSize));
+         
         }
 
+
+        //ADD CRASH
         [HttpGet]
         public IActionResult AddCrash()
         {
@@ -51,25 +53,12 @@ namespace UtahTraffix.Controllers
         [HttpPost]
         public IActionResult AddCrash(Crash crash)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    if (crash.crashPhoneNumber.Length == 10)
-            //    {
-            //        var phoneFormatted = crash.crashPhoneNumber.Insert(0, "(").Insert(4, ") ").Insert(9, "-");
-            //        crash.crashPhoneNumber = phoneFormatted;
-            //    }
 
                 _repo.Add(crash);
                 ViewBag.ActionString = "Successfully Added crash Record:";
 
                 return View("Confirmation", crash);
             
-            //else
-            //{
-              
-
-            //    return View(crash);
-            //}
         }
 
         [HttpGet]
@@ -113,10 +102,10 @@ namespace UtahTraffix.Controllers
         {
             _repo.Delete(crash);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Confirmation");
         }
 
-        public IActionResult Privacy()
+        public IActionResult Confirmation()
         {
             return View();
         }

@@ -1,8 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Crash List";
 }
+@model PagedList.IPagedList<UtahTraffix.Models.Crash>
+@using PagedList.Mvc;
 
-@model List<Crash>
 
 <h1>Crashes</h1>
 
@@ -16,23 +17,43 @@
             <th scope="col">Date</th>
             <th scope="col">City</th>
             <th scope="col">Severity</th>
+            <th scope="col"></th> @*Edit*@
+            <th scope="col"></th>  @*Delete*@
         </tr>
     </thead>
     <tbody>
         @foreach (var c in Model)
         {
-        <tr>
-            <td>@c.CRASH_ID</td>
-            <td>@c.CRASH_DATETIME</td>
-            <td>@c.CITY</td>
-            <td>@c.CRASH_SEVERITY_ID</td>
-            <td class="btn btn-primary">
-                <a class="nav-link text-white"  asp-route-id="@c.CRASH_ID" asp-controller="Home" asp-action="EditCrash">EditCrash</a>
-            </td>
-     
+            <tr>
+                <td>@c.CRASH_ID</td>
+                <td>@c.CRASH_DATETIME</td>
+                <td>@c.CITY</td>
+                <td>@c.CRASH_SEVERITY_ID</td>
+                <td></td>
+                <td class="btn btn-primary">
+                    <a class="text-white" asp-route-id="@c.CRASH_ID" asp-controller="Home" asp-action="EditCrash">Edit</a>
+                </td>
+                <td class="">
+                    <a class="btn btn-primary text-white" asp-route-id="@c.CRASH_ID" asp-controller="Home" asp-action="DeleteCrash">Delete </a>
+                </td>
 
-        </tr>
+            </tr>
 
         }
     </tbody>
 </table>
+<br />
+
+
+    Page @(Model.PageCount< Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @*@Html.PagedListPager(Model, page => Url.Action("CrashList", new { page }))*@
+
+    @*@Html.ActionLink("Next Page", "CrashList", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })*@
+
+
+    @*@Html.ActionLink("next page", "Search", new {
+        query, startIndex = startIndex + pageSize, pageSize }) %>*@
+
+
+    @*<button>@pageNum</button>
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@

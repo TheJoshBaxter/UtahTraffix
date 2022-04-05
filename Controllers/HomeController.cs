@@ -45,7 +45,7 @@ namespace UtahTraffix.Controllers
         public IActionResult AddCrash()
         {
 
-            return View("Addcrash");
+            return View();
         }
 
         [HttpPost]

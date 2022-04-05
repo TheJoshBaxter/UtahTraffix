@@ -20,26 +20,36 @@ namespace UtahTraffix.Controllers
 
         public IActionResult Index()
         {
+            //var crashes = _repo.GetCrashesFiltered();
+            //crashes
+
+
+
+            return View();
+        }
+
+        public IActionResult CrashList()//int pageNum = 1
+
+        {
+            //int pageNum = 1;
+            //int pageSize = 20;
+
+
             var crashes = _repo.GetCrashesFiltered();
- 
-            //ViewBag.FilterId = teamId;
-            //if (teamId != 0)
-            //{
-            //    ViewBag.FilterName = _repo.Teams.Single(x => x.TeamID == teamId).TeamName;
-            //}
+           // .Take(pageSize);
 
             return View(crashes);
         }
 
         [HttpGet]
-        public IActionResult Addcrash()
+        public IActionResult AddCrash()
         {
 
             return View("Addcrash");
         }
 
         [HttpPost]
-        public IActionResult Addcrash(Crash crash)
+        public IActionResult AddCrash(Crash crash)
         {
             //if (ModelState.IsValid)
             //{
@@ -52,7 +62,7 @@ namespace UtahTraffix.Controllers
                 _repo.Add(crash);
                 ViewBag.ActionString = "Successfully Added crash Record:";
 
-                return View("ConfirmationPage", crash);
+                return View("Confirmation", crash);
             
             //else
             //{
@@ -63,7 +73,7 @@ namespace UtahTraffix.Controllers
         }
 
         [HttpGet]
-        public IActionResult Editcrash(int id)
+        public IActionResult EditCrash(int id)
         {
            
 
@@ -87,7 +97,7 @@ namespace UtahTraffix.Controllers
                 _repo.Edit(crash);
                 ViewBag.ActionString = "Successfully Updated crash Record:";
 
-                return View("ConfirmationPage", crash);
+                return View("Confirmation", crash);
             //}
            
         }

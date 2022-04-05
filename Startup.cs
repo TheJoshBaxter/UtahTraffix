@@ -30,7 +30,7 @@ namespace UtahTraffix
 
             services.AddDbContext<CrashDbContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:BowlingDbConnection"]);
+                options.UseMySql(Configuration["ConnectionStrings:TraffixDbConnection"]);
             });
 
             services.AddScoped<iCrashRepository, EFCrashRepository>();

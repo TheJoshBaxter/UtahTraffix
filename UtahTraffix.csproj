@@ -12,6 +12,7 @@
     <None Remove="Pages\" />
     <None Remove="Pages\New Folder\" />
     <None Remove="PagedList.Mvc" />
+    <None Remove="MySql.Data" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.23">

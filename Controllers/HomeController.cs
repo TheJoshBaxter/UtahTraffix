@@ -28,16 +28,26 @@ namespace UtahTraffix.Controllers
         }
              
         //CRASH LIST
-        public IActionResult CrashList( int? page)//int pageNum = 1
+        public IActionResult CrashList(int page = 1, string searchString = "", string filterColumn = "")//int pageNum = 1
         {
-         
 
-            var crashes = _repo.GetCrashesFiltered();
+            var crashesPerPage = 20;
 
+            List<Crash> crashes;
 
-            int pageSize = 20;
-            int pageNum = (page ?? 1);
-            return View(crashes.ToPagedList(pageNum, pageSize));
+            if(searchString != "" && filterColumn != "")
+            {
+                crashes = _repo.GetCrashesFiltered(page, crashesPerPage, searchString, filterColumn);
+            }
+            else
+            {
+                crashes = _repo.GetCrashesSimple(page, crashesPerPage);
+            }
+
+            ViewBag.column = filterColumn;
+            ViewBag.searchString = searchString;
+            ViewBag.pageNum = page;
+            return View(crashes);
          
         }
 

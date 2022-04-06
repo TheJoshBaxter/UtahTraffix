@@ -11,6 +11,7 @@ namespace UtahTraffix.Models
         public void Add(Crash crash);
         public void Edit(Crash crash);
         public void Delete(Crash crash);
-        public List<Crash> GetCrashesFiltered(); //This needs to be edited
+        public List<Crash> GetCrashesFiltered(int page, int crashesPerPage, string searchString, string filterColumn); //This needs to be edited... I deleted a lot of stuff out of this function
+        public List<Crash> GetCrashesSimple(int page, int crashesPerPage);
     }
 }

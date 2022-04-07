@@ -2,7 +2,78 @@
     ViewData["Title"] = "TrafFIX";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome To Utah TrafFIX</h1>
-    <p>Our objective is to identify factors that cause car accidents in Utah and provide plausable solutions. We are Utah Traf-FIX. We will fix Traf. </p>
-</div>
+<header>
+
+    <!-- This div is  intentionally blank. It creates the transparent black overlay over the video which you can modify in the CSS -->
+    <div class="overlay"></div>
+
+    <!-- The HTML5 video element that will create the background video on the header -->
+    <video id="myVideo" playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+        <source src="~/img/Overview.mp4" type="video/mp4">
+    </video>
+
+    <!-- The header content -->
+    <div class="container h-100">
+        <div class="d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-white">
+                <h1 class="display-3">TrafFIX</h1>
+                <p class="lead mb-0">Our goal is to minimize death and injury on Utah's roads by minimizing the main causes of these colisions.</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Page section example for content below the video header -->
+<section class="about-section text-center" id="about">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="text-white mb-4">Built with Bootstrap 5</h2>
+                <p class="text-white-50">
+                    Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
+                    <a href="https://startbootstrap.com/theme/grayscale/">the preview page.</a>
+                    The theme is open source, and you can use it for any purpose, personal or commercial.
+                </p>
+            </div>
+        </div>
+        <img class="img-fluid" src="~/img/crash2.jpg" alt="..." />
+    </div>
+</section>
+<!-- Projects-->
+<section class="projects-section bg-light" id="projects">
+    <div class="container px-4 px-lg-5">
+        <!-- Featured Project Row-->
+        <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
+           
+            <!-- Project One Row-->
+            <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
+                <div class="col-lg-6"><img class="img-fluid" src="~/img/crash1.jpg" alt="..." /></div>
+                <div class="col-lg-6">
+                    <div class="bg-black text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-left">
+                                <h4 class="text-white">Misty</h4>
+                                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                                <hr class="d-none d-lg-block mb-0 ms-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Project Two Row-->
+            <div class="row gx-0 justify-content-center">
+                <div class="col-lg-6"><img class="img-fluid" src="~/img/crash1.jpg" alt="..." /></div>
+                <div class="col-lg-6 order-lg-first">
+                    <div class="bg-black text-center h-100 project">
+                        <div class="d-flex h-100">
+                            <div class="project-text w-100 my-auto text-center text-lg-right">
+                                <h4 class="text-white">Mountains</h4>
+                                <p class="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                                <hr class="d-none d-lg-block mb-0 me-0" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

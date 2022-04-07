@@ -3,10 +3,20 @@
 }
 @model List<Crash>
 
+    <div class="container h-100 bg-dark w-100">
+        <div class="d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-white">
+                @*<h1 class="display-3">TrafFIX</h1>
+                <p class="lead mb-0">Our goal is to minimize death and injury on Utah's roads by minimizing the main causes of these colisions.</p>*@
+            </div>
+        </div>
+    </div>
 
-<h1>Crashes</h1>
 
-<form asp-action="CrashList" asp-route-page="@ViewBag.pageNum" method="get" >
+
+<h1 class="myTitle">Crashes</h1>
+
+<form asp-action="CrashList" asp-route-page="@ViewBag.pageNum" method="get">
     <label>Filter by </label>
     <select name="filterColumn">
         <option value="">Select</option>
@@ -75,12 +85,13 @@
 
 <p>Page</p>
 
-<p>@if (ViewBag.pageNum != 1)
+<p>
+    @if (ViewBag.pageNum != 1)
     {
         <a asp-action="CrashList" asp-route-page="@(ViewBag.pageNum - 1)">@(ViewBag.pageNum - 1)</a>
     }
-    @ViewBag.pageNum
-    <a asp-action="CrashList" asp-route-page="@(ViewBag.pageNum + 1)">@(ViewBag.pageNum + 1)</a>
+@ViewBag.pageNum
+<a asp-action="CrashList" asp-route-page="@(ViewBag.pageNum + 1)">@(ViewBag.pageNum + 1)</a>
 </p>
 
 

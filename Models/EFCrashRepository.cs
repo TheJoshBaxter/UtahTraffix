@@ -102,9 +102,9 @@ namespace UtahTraffix.Models
 
             string searchNew = "'%" + searchString + "%'";
 
-            cmd.CommandText = "SELECT * FROM crashes WHERE @column LIKE @search LIMIT @pageSize OFFSET @pageOffset";
-            cmd.Parameters.AddWithValue("@column", filterColumn);
-            cmd.Parameters.AddWithValue("@search", searchNew);
+            cmd.CommandText = "SELECT * FROM crashes WHERE " + filterColumn + " LIKE " + searchNew + " LIMIT @pageSize OFFSET @pageOffset";
+            //cmd.Parameters.AddWithValue("@filterCol", filterColumn);
+            //cmd.Parameters.AddWithValue("@searchStr", searchNew);
             cmd.Parameters.AddWithValue("@pageSize", crashesPerPage);
             cmd.Parameters.AddWithValue("@pageOffset", offset);
 

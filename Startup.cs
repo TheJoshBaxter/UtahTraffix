@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.ML.OnnxRuntime;
 using UtahTraffix.Models;
 
 namespace UtahTraffix
@@ -28,7 +29,6 @@ namespace UtahTraffix
         {
             services.AddControllersWithViews();
 
-
             services.AddDbContext<CrashDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:TraffixDbConnection"]);
@@ -41,6 +41,12 @@ namespace UtahTraffix
             services.AddRazorPages();
 
             services.AddServerSideBlazor();
+
+            services.AddSingleton<InferenceSession>(
+            new InferenceSession("Models/traffix20.onnx")
+          );
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

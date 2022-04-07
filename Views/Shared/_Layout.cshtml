@@ -37,6 +37,9 @@
                     <li class="nav-item">
                         <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="AddCrash">Add Crash</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-muted" asp-area="" asp-controller="Home" asp-action="Predict">Make a Prediction</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -50,6 +53,7 @@
    
     <!-- Footer-->
     <footer id="myFooter" class="bg-black small text-center text-white-50">
+        <a asp-action="PrivacyPolicy" asp-controller="Home" class="">Privacy Policy </a>
         <div class="">Copyright &copy; TrafFIX 2022</div>
     </footer>
 

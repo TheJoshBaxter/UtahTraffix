@@ -16,26 +16,20 @@ namespace UtahTraffix.Models
 
         public IQueryable<Crash> Crashes => _context.Crashes;
 
-        public MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=traffix;user=root;password=sammyboy24");
+        public MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=traffix;user=root;password=rootuser123");
 
-        public void Save()
+        public void SaveCrash(Crash c)
         {
             _context.SaveChanges();
         }
-
-        public void Add(Crash Crash)
+        public void CreateCrash(Crash c)
         {
-            _context.Add(Crash);
+            _context.Add(c);
             _context.SaveChanges();
         }
-        public void Edit(Crash Crash)
+        public void DeleteCrash(Crash c)
         {
-            _context.Update(Crash);
-            _context.SaveChanges();
-        }
-        public void Delete(Crash Crash)
-        {
-            _context.Remove(Crash);
+            _context.Remove(c);
             _context.SaveChanges();
         }
 

@@ -70,7 +70,7 @@ namespace UtahTraffix.Controllers
         public IActionResult AddCrash(Crash crash)
         {
 
-            _repo.Add(crash);
+            _repo.CreateCrash(crash);
             ViewBag.ActionString = "Successfully Added crash Record:";
 
             return View("Confirmation", crash);
@@ -92,7 +92,7 @@ namespace UtahTraffix.Controllers
         {
   
 
-            _repo.Edit(crash);
+            _repo.CreateCrash(crash);
             ViewBag.ActionString = "Successfully Updated crash Record:";
 
             return View("Confirmation", crash);
@@ -109,7 +109,7 @@ namespace UtahTraffix.Controllers
         [HttpPost]
         public IActionResult Deletecrash(Crash crash)
         {
-            _repo.Delete(crash);
+            _repo.DeleteCrash(crash);
 
             return RedirectToAction("Confirmation");
         }
@@ -142,6 +142,12 @@ namespace UtahTraffix.Controllers
             result.Dispose();
             return View("Result", prediction);
 
+        }
+
+        [HttpGet]
+        public IActionResult PrivacyPolicy()
+        {
+            return View();
         }
     }
 }

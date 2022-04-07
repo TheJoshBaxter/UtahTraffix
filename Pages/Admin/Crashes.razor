@@ -1,5 +1,7 @@
 ﻿@page "/admin"
+@page "/admin/{currentPage:int}"
 @page "/admin/crashes"
+@page "/admin/crashes/{currentPage:int}"
 @inherits OwningComponentBase<ICrashRepository>
 
 <h1>Crashes</h1>
@@ -41,13 +43,24 @@
             </tr>
         }
     </tbody>
+    <tfoot>
+        <Paging PI="pagingInfo" PageClassesEnabled="true" PageClass="Paging" PageClassSelected="active"></Paging>
+        @if (currentPage > 1)
+        {
+            <NavLink class="btn btn-primary" href="@GetBackUrl(currentPage)">Previous Page</NavLink>
+        }
+        <NavLink class="btn btn-primary">@currentPage</NavLink>
+        <NavLink class="btn btn-primary" href="@GetForwardUrl(currentPage)">Next Page</NavLink>
+
+    </tfoot>
 </table>
 
 <NavLink class="btn btn-primary" href="/admin/crashes/create">Add New Crash</NavLink>
 
 @code {
-    //below are all from the ACTUAL PAGE to which TABLE gets added in the videos (JB)
+    //grab data
     public ICrashRepository repo => Service;
+
 
     public IEnumerable<Crash> CrashData { get; set; }
 
@@ -58,16 +71,57 @@
 
     public async Task UpdateData()
     {
-        CrashData = await repo.Crashes.Take(100).ToListAsync();
+        int PageSize = 10;
+        currentPage = currentPage == 0 ? 1 : currentPage;
+
+        var skip = PageSize * (Convert.ToInt32(currentPage) - 1);
+        CrashData = await repo.Crashes.Skip(skip).Take(PageSize).ToListAsync();
+        @*CrashData = await repo.Crashes.ToListAsync();*@
     }
 
-    //edit delete functionality
+    //separate variable for holding ten crashes at a time for pagination
+    public IEnumerable<Crash> SmallCrashData { get; set; } = Enumerable.Empty<Crash>();
+
+    // edit/delete functionality
     public string GetDetailsUrl(long id) => $"/admin/crashes/details/{id}";
     public string GetEditUrl(long id) => $"/admin/crashes/edit/{id}";
+    public string GetBackUrl(int pageNum) => $"/admin/{pageNum - 1}";
+    public string GetForwardUrl(int pageNum) => $"/admin/{pageNum + 1}";
+
 
     public async Task RemoveCrash(Crash c)
     {
-        repo.Delete(c);
+        repo.DeleteCrash(c);
         await UpdateData();
     }
+
+    // paging functionality
+    [Parameter]
+    public int currentPage { get; set; }
+
+    PagingInfo pagingInfo = new PagingInfo();
+
+    protected override void OnParametersSet()
+    {
+        CreatePagingInfo();
+    }
+
+    public void CreatePagingInfo()
+    {
+        @*var AllStudents = Context.Student.Include(p => p.School_R).Include(p => p.Location_R);*@
+
+    @*int PageSize = 10;
+    pagingInfo = new PagingInfo();*@
+    @*pagingInfo.ItemsPerPage = PageSize;
+    page = page == 0 ? 1 : page;
+    pagingInfo.CurrentPage = page;
+    pagingInfo.TotalItems = CrashData.Count();
+    pagingInfo.TotalPages = (int)Math.Ceiling((decimal)pagingInfo.TotalItems / pagingInfo.ItemsPerPage);*@
+
+
+    @*var skip = PageSize * (Convert.ToInt32(page) - 1);
+    SmallCrashData = CrashData.Skip(skip).Take(PageSize).ToList();*@
+    var pageBack = currentPage - 1;
+    var pageForward = currentPage + 1;
+}
 }

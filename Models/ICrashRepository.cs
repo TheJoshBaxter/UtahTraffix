@@ -8,10 +8,10 @@ namespace UtahTraffix.Models
     {
         IQueryable<Crash> Crashes { get; }
 
-        public void Save();
-        public void Add(Crash crash);
-        public void Edit(Crash crash);
-        public void Delete(Crash crash);
+        public void SaveCrash(Crash crash);
+        public void CreateCrash(Crash crash);
+        public void DeleteCrash(Crash crash);
+
         public List<Crash> GetCrashesFiltered(int page, int crashesPerPage, string searchString, string filterColumn); //This needs to be edited... I deleted a lot of stuff out of this function
         public List<Crash> GetCrashesSimple(int page, int crashesPerPage);
     }

@@ -5,7 +5,7 @@ using MySql.Data.MySqlClient;
 using System.Reflection;
 namespace UtahTraffix.Models
 {
-    public class EFCrashRepository : iCrashRepository
+    public class EFCrashRepository : ICrashRepository
     { 
         private CrashDbContext _context { get; set; }
 
@@ -18,7 +18,10 @@ namespace UtahTraffix.Models
 
         public MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;database=traffix;user=root;password=sammyboy24");
 
-
+        public void Save()
+        {
+            _context.SaveChanges();
+        }
 
         public void Add(Crash Crash)
         {
@@ -128,7 +131,3 @@ namespace UtahTraffix.Models
         }
     }
 }
-
-
-
-

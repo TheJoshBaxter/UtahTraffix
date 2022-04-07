@@ -14,9 +14,9 @@ namespace UtahTraffix.Controllers
 {
     public class HomeController : Controller
     {
-        private iCrashRepository _repo { get; set; }
+        private ICrashRepository _repo { get; set; }
 
-        public HomeController(iCrashRepository temp)
+        public HomeController(ICrashRepository temp)
         {
             _repo = temp;
         }

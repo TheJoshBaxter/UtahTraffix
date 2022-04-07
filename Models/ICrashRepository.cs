@@ -4,10 +4,11 @@ using System.Linq;
 
 namespace UtahTraffix.Models
 {
-    public interface iCrashRepository
+    public interface ICrashRepository
     {
         IQueryable<Crash> Crashes { get; }
 
+        public void Save();
         public void Add(Crash crash);
         public void Edit(Crash crash);
         public void Delete(Crash crash);
